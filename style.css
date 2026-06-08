@@ -1,0 +1,379 @@
+/*
+Theme Name: Pyme Starter - Kit Digital
+Theme URI: https://github.com/LluisDam/wordpress-pyme-starter
+Author: Lluis Soberats
+Author URI: https://github.com/LluisDam
+Description: WordPress starter theme for Spanish SMEs (pymes) with Kit Digital programme integration. Responsive, accessible, AJAX contact form, and admin panel for subsidy management.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: pyme-starter
+Tags: kit-digital, pyme, responsive, one-page, spanish
+*/
+
+/* =============================================
+   RESET & BASE
+============================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary: #1a56db;
+  --primary-dark: #1240a8;
+  --secondary: #f97316;
+  --accent: #10b981;
+  --dark: #111827;
+  --gray: #6b7280;
+  --light-gray: #f3f4f6;
+  --white: #ffffff;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow: 0 4px 6px -1px rgba(0,0,0,.1);
+  --shadow-lg: 0 10px 25px -3px rgba(0,0,0,.15);
+  --radius: 8px;
+  --radius-lg: 16px;
+  --transition: .2s ease;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--dark);
+  line-height: 1.6;
+  background: var(--white);
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--primary); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--primary-dark); }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* =============================================
+   HEADER / NAV
+============================================= */
+#site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid #e5e7eb;
+  transition: box-shadow var(--transition);
+}
+
+#site-header.scrolled { box-shadow: var(--shadow); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.site-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.kit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  background: var(--primary);
+  color: var(--white);
+  font-size: .7rem;
+  font-weight: 600;
+  padding: .25rem .6rem;
+  border-radius: 20px;
+  margin-left: .5rem;
+  letter-spacing: .03em;
+}
+
+nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+nav a {
+  font-weight: 500;
+  color: var(--dark);
+  font-size: .95rem;
+}
+
+nav a:hover { color: var(--primary); }
+
+/* =============================================
+   HERO
+============================================= */
+#hero {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #e0f2fe 100%);
+  padding: 5rem 0 4rem;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(26,86,219,.1);
+  color: var(--primary);
+  font-size: .85rem;
+  font-weight: 600;
+  padding: .4rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+}
+
+#hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+  color: var(--dark);
+}
+
+#hero h1 span { color: var(--primary); }
+
+#hero p {
+  font-size: 1.2rem;
+  color: var(--gray);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .75rem 1.75rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  color: var(--white);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* =============================================
+   SECTIONS
+============================================= */
+section { padding: 5rem 0; }
+section:nth-child(even) { background: var(--light-gray); }
+
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-header h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: .75rem; }
+.section-header p { color: var(--gray); font-size: 1.1rem; max-width: 550px; margin: 0 auto; }
+
+/* =============================================
+   SERVICES GRID
+============================================= */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.service-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+.service-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 1.25rem;
+  background: rgba(26,86,219,.08);
+}
+
+.service-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: .5rem; }
+.service-card p { color: var(--gray); font-size: .95rem; }
+
+/* =============================================
+   KIT DIGITAL SECTION
+============================================= */
+#kit-digital { background: var(--primary); color: var(--white); }
+#kit-digital .section-header h2 { color: var(--white); }
+#kit-digital .section-header p { color: rgba(255,255,255,.8); }
+
+.kd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.kd-card {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.kd-amount {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--secondary);
+  display: block;
+  margin-bottom: .25rem;
+}
+
+.kd-label { font-size: .9rem; color: rgba(255,255,255,.85); }
+
+.kd-cta { text-align: center; }
+.kd-cta .btn { background: var(--secondary); color: var(--white); }
+.kd-cta .btn:hover { background: #ea6400; color: var(--white); }
+
+/* =============================================
+   CONTACT FORM
+============================================= */
+#contact { background: var(--white); }
+
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) { .contact-wrapper { grid-template-columns: 1fr; } }
+
+.contact-info h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+.contact-info p { color: var(--gray); margin-bottom: 1.5rem; }
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .75rem;
+  color: var(--gray);
+}
+
+.contact-detail strong { color: var(--dark); }
+
+.contact-form { background: var(--light-gray); border-radius: var(--radius-lg); padding: 2rem; }
+
+.form-group { margin-bottom: 1.25rem; }
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: .9rem;
+  margin-bottom: .4rem;
+  color: var(--dark);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: .75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  background: var(--white);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  color: var(--dark);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(26,86,219,.15);
+}
+
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+.form-status {
+  margin-top: 1rem;
+  padding: .75rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  display: none;
+}
+
+.form-status.success { background: #d1fae5; color: #065f46; display: block; }
+.form-status.error { background: #fee2e2; color: #991b1b; display: block; }
+
+/* =============================================
+   FOOTER
+============================================= */
+#site-footer {
+  background: var(--dark);
+  color: rgba(255,255,255,.7);
+  padding: 2rem 0;
+  text-align: center;
+  font-size: .9rem;
+}
+
+#site-footer a { color: rgba(255,255,255,.7); }
+#site-footer a:hover { color: var(--white); }
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  align-items: center;
+}
+
+/* =============================================
+   RESPONSIVE
+============================================= */
+@media (max-width: 768px) {
+  nav ul { gap: 1rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .kd-grid { grid-template-columns: 1fr 1fr; }
+  #hero { padding: 3rem 0 2.5rem; }
+}
+
+@media (max-width: 480px) {
+  .kd-grid { grid-template-columns: 1fr; }
+  nav { display: none; }
+}
